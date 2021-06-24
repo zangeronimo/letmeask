@@ -6,17 +6,17 @@ import googleIconImg from "../assets/images/google-icon.svg";
 
 import { Button } from "../components/Button";
 import "../styles/auth.scss";
-import { auth, firebase } from "../services/firebase";
+import { useAuth } from "../hooks/useAuth";
 
 export const Home = () => {
   const history = useHistory();
+  const { user, signInWithGoogle } = useAuth();
 
-  const handleCreateRoom = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-
-    auth.signInWithPopup(provider).then((result) => {
-      history.push("/rooms/new");
-    });
+  const handleCreateRoom = async () => {
+    if (!user) {
+      await signInWithGoogle();
+    }
+    history.push("/rooms/new");
   };
 
   return (
