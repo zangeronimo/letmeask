@@ -6,15 +6,23 @@ type QuestionProps = {
     name: string;
     avatar: string;
   };
+  isAnswered?: boolean;
+  isHighlighted?: boolean;
 };
 
 export const Question: React.FC<QuestionProps> = ({
   content,
   author,
+  isAnswered = false,
+  isHighlighted = false,
   children,
 }) => {
   return (
-    <div className="question">
+    <div
+      className={`question ${isAnswered ? "answered" : ""} ${
+        isHighlighted && !isAnswered ? "highlighted" : ""
+      }`}
+    >
       <p>{content}</p>
       <footer>
         <div className="user-info">
