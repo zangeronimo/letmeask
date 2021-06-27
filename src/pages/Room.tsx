@@ -1,14 +1,14 @@
-import { FormEvent, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import logoImg from "../assets/images/logo.svg";
-import { Button } from "../components/Button";
-import { Question } from "../components/Question";
-import { RoomCode } from "../components/RoomCode";
-import { useAuth } from "../hooks/useAuth";
-import { useRoom } from "../hooks/useRoom";
-import { database } from "../services/firebase";
+import { FormEvent, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import logoImg from '../assets/images/logo.svg';
+import { Button } from '../components/Button';
+import { Question } from '../components/Question';
+import { RoomCode } from '../components/RoomCode';
+import { useAuth } from '../hooks/useAuth';
+import { useRoom } from '../hooks/useRoom';
+import { database } from '../services/firebase';
 
-import "../styles/room.scss";
+import '../styles/room.scss';
 
 type RoomParams = {
   id: string;
@@ -16,7 +16,7 @@ type RoomParams = {
 
 export const Room = () => {
   const { user } = useAuth();
-  const [newQuestion, setNewQuestion] = useState("");
+  const [newQuestion, setNewQuestion] = useState('');
   const params = useParams<RoomParams>();
   const roomId = params.id;
   const { questions, title } = useRoom(roomId);
@@ -25,12 +25,12 @@ export const Room = () => {
   const handleSendQuestion = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (newQuestion.trim() === "") {
+    if (newQuestion.trim() === '') {
       return;
     }
 
     if (!user) {
-      throw new Error("You must be logged in");
+      throw new Error('You must be logged in');
     }
 
     const question = {
@@ -44,15 +44,15 @@ export const Room = () => {
     };
 
     await database.ref(`rooms/${roomId}/questions`).push(question);
-    setNewQuestion("");
+    setNewQuestion('');
   };
 
   const handleLikeQuestion = async (
     questionId: string,
-    likeId: string | undefined
+    likeId: string | undefined,
   ) => {
     if (!user) {
-      throw new Error("You must be logged in");
+      throw new Error('You must be logged in');
     }
 
     if (likeId) {
@@ -85,7 +85,7 @@ export const Room = () => {
         <form onSubmit={handleSendQuestion}>
           <textarea
             placeholder="O que você quer perguntar?"
-            onChange={(e) => setNewQuestion(e.target.value)}
+            onChange={e => setNewQuestion(e.target.value)}
             value={newQuestion}
           />
 
@@ -97,8 +97,8 @@ export const Room = () => {
               </div>
             ) : (
               <span>
-                Para enviar uma pergunta,{" "}
-                <button type="button" onClick={() => history.push("/")}>
+                Para enviar uma pergunta,{' '}
+                <button type="button" onClick={() => history.push('/')}>
                   faça seu login
                 </button>
                 .
@@ -111,7 +111,7 @@ export const Room = () => {
         </form>
 
         <div className="question-list">
-          {questions.map((question) => {
+          {questions.map(question => {
             return (
               <Question
                 key={question.id}
@@ -122,7 +122,7 @@ export const Room = () => {
               >
                 {!question.isAnswered && (
                   <button
-                    className={`like-button ${question.likeId ? "liked" : ""}`}
+                    className={`like-button ${question.likeId ? 'liked' : ''}`}
                     type="button"
                     aria-label="Marcar como gostei"
                     onClick={() =>

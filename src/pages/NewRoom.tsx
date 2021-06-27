@@ -1,27 +1,27 @@
-import illustrationImg from "../assets/images/illustration.svg";
-import logoImg from "../assets/images/logo.svg";
+import illustrationImg from '../assets/images/illustration.svg';
+import logoImg from '../assets/images/logo.svg';
 
-import "../styles/auth.scss";
-import { Button } from "../components/Button";
-import { Link, useHistory } from "react-router-dom";
-import { FormEvent } from "react";
-import { useState } from "react";
-import { database } from "../services/firebase";
-import { useAuth } from "../hooks/useAuth";
+import '../styles/auth.scss';
+import { Button } from '../components/Button';
+import { Link, useHistory } from 'react-router-dom';
+import { FormEvent } from 'react';
+import { useState } from 'react';
+import { database } from '../services/firebase';
+import { useAuth } from '../hooks/useAuth';
 
 export const NewRoom = () => {
-  const [newRoom, setNewRoom] = useState("");
+  const [newRoom, setNewRoom] = useState('');
   const { user } = useAuth();
   const history = useHistory();
 
   const handleCreateRoom = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (newRoom.trim() === "") {
+    if (newRoom.trim() === '') {
       return;
     }
 
-    const roomRef = database.ref("rooms");
+    const roomRef = database.ref('rooms');
 
     const firebaseRoom = await roomRef.push({
       title: newRoom,
@@ -51,7 +51,7 @@ export const NewRoom = () => {
               type="text"
               placeholder="Nome da sala"
               value={newRoom}
-              onChange={(e) => setNewRoom(e.target.value)}
+              onChange={e => setNewRoom(e.target.value)}
             />
             <Button type="submit">Criar sala</Button>
           </form>

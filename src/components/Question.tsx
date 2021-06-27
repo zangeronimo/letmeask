@@ -1,4 +1,4 @@
-import "../styles/question.scss";
+import '../styles/question.scss';
 
 type QuestionProps = {
   content: string;
@@ -19,8 +19,8 @@ export const Question: React.FC<QuestionProps> = ({
 }) => {
   return (
     <div
-      className={`question ${isAnswered ? "answered" : ""} ${
-        isHighlighted && !isAnswered ? "highlighted" : ""
+      className={`question ${isAnswered ? 'answered' : ''} ${
+        isHighlighted && !isAnswered ? 'highlighted' : ''
       }`}
     >
       <p>{content}</p>

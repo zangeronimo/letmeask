@@ -1,16 +1,16 @@
-import { useHistory, useParams } from "react-router-dom";
-import { Button } from "../components/Button";
-import { Question } from "../components/Question";
-import { RoomCode } from "../components/RoomCode";
-import { useRoom } from "../hooks/useRoom";
+import { useHistory, useParams } from 'react-router-dom';
+import { Button } from '../components/Button';
+import { Question } from '../components/Question';
+import { RoomCode } from '../components/RoomCode';
+import { useRoom } from '../hooks/useRoom';
 
-import logoImg from "../assets/images/logo.svg";
-import deleteImg from "../assets/images/delete.svg";
-import checkImg from "../assets/images/check.svg";
-import answerImg from "../assets/images/answer.svg";
+import logoImg from '../assets/images/logo.svg';
+import deleteImg from '../assets/images/delete.svg';
+import checkImg from '../assets/images/check.svg';
+import answerImg from '../assets/images/answer.svg';
 
-import "../styles/room.scss";
-import { database } from "../services/firebase";
+import '../styles/room.scss';
+import { database } from '../services/firebase';
 
 type RoomParams = {
   id: string;
@@ -27,7 +27,7 @@ export const AdminRoom = () => {
       endedAt: new Date(),
     });
 
-    history.push("/");
+    history.push('/');
   };
 
   const handleCheckQuestionAsAnswered = async (questionId: string) => {
@@ -43,7 +43,7 @@ export const AdminRoom = () => {
   };
 
   const handleDeleteQuestion = async (questionId: string) => {
-    if (window.confirm("Tem certeza que deseja excluir esta pergunta?")) {
+    if (window.confirm('Tem certeza que deseja excluir esta pergunta?')) {
       await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
     }
   };
@@ -68,7 +68,7 @@ export const AdminRoom = () => {
         </div>
 
         <div className="question-list">
-          {questions.map((question) => {
+          {questions.map(question => {
             return (
               <Question
                 key={question.id}
